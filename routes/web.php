@@ -31,3 +31,6 @@ Route::get('/linktree-hangry', function () {
 Route::get('/tes', function () {
     return view('tes');
 });
+Route::get('/pegawai/{nama}', 'App\Http\Controllers\DosenController@shownama');
+Route::get('/formulir', 'App\Http\Controllers\DosenController@formulir');
+Route::post('/formulir/proses', 'App\Http\Controllers\DosenControllerr@proses');
