@@ -16,3 +16,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/bootstrap-jumbotron', function () {
+    return view('BOOTSTRAPJUMBOTRON');
+});
+Route::get('/js2', function () {
+    return view('JS2');
+});
+Route::get('/latihan1', function () {
+    return view('Latihan1');
+});
+Route::get('/linktree-hangry', function () {
+    return view('LinktreeHangry');
+});
+Route::get('/tes', function () {
+    return view('tes');
+});
