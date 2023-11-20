@@ -12,22 +12,17 @@
 
 	<p>Ini Adalah Halaman Kontak</p>
 
-	<table class="table table-hover">
+	<table border="1">
 		<tr>
 			<td>Email</td>
 			<td>:</td>
 			<td>malasngoding@gmail.com</td>
 		</tr>
-        @for ()
 		<tr>
 			<td>Hp</td>
 			<td>:</td>
 			<td>0896-0676-7404</td>
 		</tr>
-
-        @endfor
-
-        @endfor
 	</table>
 
 @endsection

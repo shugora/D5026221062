@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use  App\Http\Controllers\PegawaiController;
+use  App\Http\Controllers\BlogController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,21 +17,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/bootstrap-jumbotron', function () {
-    return view('BOOTSTRAPJUMBOTRON');
-});
-Route::get('/js2', function () {
-    return view('JS2');
-});
-Route::get('/latihan1', function () {
-    return view('Latihan1');
-});
-Route::get('/linktree-hangry', function () {
-    return view('LinktreeHangry');
-});
-Route::get('/tes', function () {
-    return view('tes');
-});
-Route::get('/pegawai/{nama}', 'App\Http\Controllers\DosenController@shownama');
-Route::get('/formulir', 'App\Http\Controllers\DosenController@formulir');
-Route::post('/formulir/proses', 'App\Http\Controllers\DosenControllerr@proses');
+Route::get('/mahasiswa/{nama}', [PegawaiController::class, "mahasiswa"]);
+Route::get('/form', [PegawaiController::class, "formulir"]);
+Route::post('/submitform', [PegawaiController::class, "submitformulir"]);
+Route::get('/pegawai', [PegawaiController::class, "index"]);
+Route::get('/pegawai/tambah', [PegawaiController::class, "tambah"]);
+Route::post('/pegawai/store', [PegawaiController::class, "store"]);
+Route::get('/pegawai/edit/{id}', [PegawaiController::class, "edit"]);
+Route::post('/pegawai/update', [PegawaiController::class, "update"]);
+
+
+Route::get('/blog', [BlogController::class, "home"]);
+Route::get('/blog/tentang', [BlogController::class, "tentang"]);
+Route::get('/blog/kontak', [BlogController::class, "kontak"]);

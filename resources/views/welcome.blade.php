@@ -136,5 +136,11 @@
                 </div>
             </div>
         </div>
+        <footer>
+            <h1>LINKS</h1>
+            <a href="http://127.0.0.1:8000/form" target= "_blank"> form</a>
+            <a href="http://127.0.0.1:8000/blog" target= "_blank"> blog</a>
+            <a href="http://127.0.0.1:8000/pegawai" target= "_blank"> pegawai</a>
+        </footer>
     </body>
 </html>
