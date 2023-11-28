@@ -12,7 +12,7 @@
 
 	<p>Ini Adalah Halaman Kontak</p>
 
-	<table border="1">
+	<table class="table table-hover">
 		<tr>
 			<td>Email</td>
 			<td>:</td>
@@ -23,6 +23,13 @@
 			<td>:</td>
 			<td>0896-0676-7404</td>
 		</tr>
+        @for ($i = 1 ; $i<5 ; $i++)
+        <tr>
+			<td>NO</td>
+			<td>:</td>
+			<td>{{$i}}</td>
+		</tr>
+        @endfor
 	</table>
 
 @endsection

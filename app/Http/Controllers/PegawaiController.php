@@ -7,74 +7,50 @@ use Illuminate\Support\Facades\DB;
 
 class PegawaiController extends Controller
 {
-    private $nama="Dimas Gistha";
-    private $nrp ="5026221057";
-    private $matkuls = ["Pweb","ASD","RKPL"];
-    // public function index()
-    // {
-    //    $nama="Dimas Gistha";
-    //     $nrp ="5026221057";
-    //     $matkuls = ["Pweb","ASD"];
-    //     return view("blog",[
-    //         "nama_panjang" => $nama,
-    //         "nrp" => $nrp,
-    //         "matkuls"=> $matkuls,
-    //     ]);
-    // }
-    public function mahasiswa($nama){
-        return view("blog",[
-            "nama_panjang" => $nama,
-            "nrp" => $this->nrp,
-            "matkuls"=> $this->matkuls
-        ]);
-
-    }
-    public function formulir(){
-        return view("form");
-
-    }
-    public function submitformulir(Request $request){
-        $nama = $request->input('Nama');
-        $nrp = $request->input('NRP');
-
-        return $nama . " " . $nrp;
-    }
-
     public function index()
     {
-    	// mengambil data dari table pegawai
-    	$pegawai = DB::table('pegawai')->get();
+        //mengambil data dari tabel pegawai
+        // $pegawai = DB::table('pegawai')->get();
+        $pegawai = DB::table('pegawai')->paginate(5);
 
-    	// mengirim data pegawai ke view index
-    	return view('index',['pegawai' => $pegawai]);
-
+        //mengirim data pegawai ke view index
+        return view('index', ['pegawai' => $pegawai]);
     }
+
+    // method untuk menampilkan view form tambah pegawai
     public function tambah()
     {
-    	return view('tambah');
-    }
-    public function store(request $request)
-    {
 
+	// memanggil view tambah
+	return view('tambah');
+    }
+
+    // method untuk insert data ke table pegawai
+    public function store(Request $request)
+    {
+	// insert data ke table pegawai
 	DB::table('pegawai')->insert([
 		'pegawai_nama' => $request->nama,
 		'pegawai_jabatan' => $request->jabatan,
 		'pegawai_umur' => $request->umur,
 		'pegawai_alamat' => $request->alamat
 	]);
-
+	// alihkan halaman ke halaman pegawai
 	return redirect('/pegawai');
-
     }
+
+    // method untuk edit data pegawai
     public function edit($id)
     {
-        // mengambil data pegawai berdasarkan id yang dipilih
+	// mengambil data pegawai berdasarkan id yang dipilih
 	$pegawai = DB::table('pegawai')->where('pegawai_id',$id)->get();
 	// passing data pegawai yang didapat ke view edit.blade.php
 	return view('edit',['pegawai' => $pegawai]);
     }
+
+    // update data pegawai
     public function update(Request $request)
-{
+    {
 	// update data pegawai
 	DB::table('pegawai')->where('pegawai_id',$request->id)->update([
 		'pegawai_nama' => $request->nama,
@@ -84,6 +60,36 @@ class PegawaiController extends Controller
 	]);
 	// alihkan halaman ke halaman pegawai
 	return redirect('/pegawai');
-}
+    }
 
+    // method untuk hapus data pegawai
+    public function hapus($id)
+    {
+	// menghapus data pegawai berdasarkan id yang dipilih
+	DB::table('pegawai')->where('pegawai_id',$id)->delete();
+
+	// alihkan halaman ke halaman pegawai
+	return redirect('/pegawai');
+    }
+    public function cari(Request $request)
+	{
+		// menangkap data pencarian
+		$cari = $request->cari;
+
+    		// mengambil data dari table pegawai sesuai pencarian data
+		$pegawai = DB::table('pegawai')
+		->where('pegawai_nama','like',"%".$cari."%")
+		->paginate();
+
+    		// mengirim data pegawai ke view index
+		return view('index',['pegawai' => $pegawai]);
+
+	}
+
+    public function view($id)
+    { // mengambil data pegawai berdasarkan id yang dipilih
+        $pegawai = DB::table('pegawai')->where('pegawai_id',$id)->get();
+        // passing data pegawai yang didapat ke view edit.blade.php
+        return view('view',['pegawai' => $pegawai]);
+    }
 }
