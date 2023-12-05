@@ -98,3 +98,4 @@ Route::post('/pegawai/update',[PegawaiController::class, 'update']);
 Route::get('/pegawai/hapus/{id}',[PegawaiController::class, 'hapus']);
 Route::get('/pegawai/cari',[PegawaiController::class, 'cari']);
 Route::get('/pegawai/view/{id}',[PegawaiController::class, 'view']);
+Route::get('/pegawai/warna',[PegawaiController::class, 'view']);
