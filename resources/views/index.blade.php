@@ -1,55 +1,52 @@
 @extends('master2')
-@section('title', 'Database Pegawai')
+@section('title', 'Database Sepatu')
 
     @section('judul_halaman')
 
-	<h2>www.malasngoding.com</h2>
-	<h3>Data Pegawai</h3>
+		<h3>Data Sepatu</h3>
 
-	<a href="/pegawai/tambah"> + Tambah Pegawai Baru</a>
+	<a href="/sepatu/tambah"> + Tambah Sepatu Baru</a>
 
 	<br/>
 	<br/>
     @endsection
     @section('konten')
-    <p>Cari Data Pegawai :</p>
-	<form action="/pegawai/cari" method="GET">
-		<input class="form-control" type="text" name="cari" placeholder="Cari pegawai berdasarkan nama ..." value="{{ old('cari') }}">
+    <p>Cari Data Sepatu :</p>
+	<form action="/sepatu/cari" method="GET">
+		<input class="form-control" type="text" name="cari" placeholder="Cari sepatu berdasarkan kode ..." value="{{ old('cari') }}">
 		<input type="submit" value="CARI" class="btn btn-primary">
 	</form>
 	<table class="table table-striped table-hover">
 
 		<tr>
-			<th>Nama</th>
-			<th>Jabatan</th>
-			<th>Umur</th>
-			<th>Alamat</th>
-			<th>Opsi</th>
+			<th>Kode Sepatu</th>
+			<th>Merk</th>
+			<th>Stock</th>
+			<th>Tersedia</th>
+
 		</tr>
-		@foreach($pegawai as $p)
+		@foreach($sepatu as $s)
 		<tr>
-			<td>{{ $p->pegawai_nama }}</td>
-			<td>{{ $p->pegawai_jabatan }}</td>
+			<td>{{ $s->kodesepatu }}</td>
+			<td>{{ $s->merksepatu }}</td>
+            <td>{{ $s->stocksepatu }}</td>
 			<td
-            @if ($p->pegawai_umur <= 20)
+            @if ($s->tersedia = 'y')
                 class="bg-success text-white"
-            @elseif ($p->pegawai_umur >= 21 && $p->pegawai_umur <= 30)
+            @elseif ($s->tersedia = 'n')
                 class="bg-warning text-danger"
-            @elseif ($p->pegawai_umur >= 31)
-                class="bg-primary text-white"
             @endif
-            >{{ $p->pegawai_umur }}</td>
-			<td>{{ $p->pegawai_alamat }}</td>
+            >{{ $s->tersedia }}</td>
 			<td>
-				<a href="/pegawai/view/{{ $p->pegawai_id }}" class="btn btn-success">View </a>
+				<a href="/sepatu/view/{{ $s->kodesepatu }}" class="btn btn-success">View </a>
                 |
-                <a href="/pegawai/edit/{{ $p->pegawai_id }}" class="btn btn-warning">Edit </a>
+                <a href="/sepatu/edit/{{ $s->kodesepatu }}" class="btn btn-warning">Edit </a>
 				|
-				<a href="/pegawai/hapus/{{ $p->pegawai_id }}" class="btn btn-danger">Hapus</a>
+				<a href="/sepatu/hapus/{{ $s->kodesepatu }}" class="btn btn-danger">Hapus</a>
 			</td>
 		</tr>
 		@endforeach
 	</table>
-    {{$pegawai -> links()}}
+    {{$sepatu -> links()}}
 
     @endsection
